@@ -1,0 +1,25 @@
+#!/bin/python
+""" Code challenge https://www.codeeval.com/open_challenges/{{ challenge }}/
+
+Description:
+{{ description }}
+"""
+import sys
+
+
+def function(count):
+    """ TODO Parse line and insert logic here """
+    return None
+
+
+if __name__ == '__main__':
+    exit_code = 0
+    input_path = 'input.txt' if len(sys.argv) < 1 else sys.argv[1]
+    with open(input_path) as f:
+        for line in f.read().splitlines():
+            try:
+                print(function(line))
+            except:
+                exit_code = 1
+                print('Failed to evaluate line: ' + line)
+    sys.exit(exit_code)
