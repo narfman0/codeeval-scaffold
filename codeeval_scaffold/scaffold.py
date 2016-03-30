@@ -23,13 +23,13 @@ def write_project(output_dir, challenge, description, input, output, title):
         # probably already created
         pass
     # main
-    with open(os.path.join(os.path.dirname(__file__), 'templates/main.py.template')) as f:
+    with open(os.path.join(os.path.dirname(__file__), 'templates/main.py.txt')) as f:
         template = Template(f.read())
     result = template.render(challenge=challenge, description=description)
     with open(os.path.join(output_dir, 'main.py'), 'w') as f:
         f.write(result.encode('ascii','ignore'))
     # test
-    with open(os.path.join(os.path.dirname(__file__), 'templates/test.py.template')) as f:
+    with open(os.path.join(os.path.dirname(__file__), 'templates/test.py.txt')) as f:
         template = f.read()
     with open(os.path.join(output_dir, 'test.py'), 'w') as f:
         f.write(template)
@@ -47,7 +47,8 @@ def scrape(soup):
     output = None
     title = None
     last_h3 = ''
-    for child in soup.select('.maincontent')[0].children:
+    container = (soup.select('.maincontent') or soup.select('.public_content_section'))[0]
+    for child in container.children:
         if not str(child).strip():
             continue
         if 'class' in child.attrs and 'title-wrapper' in child['class']:
