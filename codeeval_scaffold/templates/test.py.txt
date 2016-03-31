@@ -9,7 +9,7 @@ class TestMethods(unittest.TestCase):
         with open('output.txt') as f:
             output = f.read().splitlines()
         for i, o in zip(input, output):
-          self.assertEqual(i, o)
+            self.assertEqual(str(function(i)), o)
 
 
 if __name__ == '__main__':
