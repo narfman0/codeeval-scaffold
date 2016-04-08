@@ -22,17 +22,19 @@ def write_project(output_dir, challenge, description, input, output, title):
     except OSError:
         # probably already created
         pass
+    python_title = title.lower().replace(' ', "_")
     # main
     with open(os.path.join(os.path.dirname(__file__), 'templates/main.py.txt')) as f:
         template = Template(f.read())
-    result = template.render(challenge=challenge, description=description)
+    result = template.render(challenge=challenge, description=description, title=python_title)
     with open(os.path.join(output_dir, 'main.py'), 'w') as f:
         f.write(result.encode('ascii','ignore'))
     # test
     with open(os.path.join(os.path.dirname(__file__), 'templates/test.py.txt')) as f:
-        template = f.read()
+        template = Template(f.read())
+    result = template.render(challenge=challenge, description=description, title=python_title)
     with open(os.path.join(output_dir, 'test.py'), 'w') as f:
-        f.write(template)
+        f.write(result.encode('ascii','ignore'))
     # data
     with open(os.path.join(output_dir, 'input.txt'), 'w') as f:
         f.write(input)

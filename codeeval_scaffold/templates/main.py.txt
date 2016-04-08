@@ -7,7 +7,7 @@ Description:
 import sys
 
 
-def function(count):
+def {{ title }}(count):
     """ TODO Parse line and insert logic here """
     return None
 
@@ -16,9 +16,9 @@ if __name__ == '__main__':
     exit_code = 0
     input_path = 'input.txt' if len(sys.argv) < 1 else sys.argv[1]
     with open(input_path) as f:
-        for line in f.read().splitlines():
+        for line in f:
             try:
-                print(function(line))
+                print({{ title }}(line[:-1]))
             except:
                 exit_code = 1
                 print('Failed to evaluate line: ' + line)

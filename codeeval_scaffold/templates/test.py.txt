@@ -1,5 +1,5 @@
 import unittest
-from main import function
+from main import {{ title }}
 
 
 class TestMethods(unittest.TestCase):
@@ -9,7 +9,7 @@ class TestMethods(unittest.TestCase):
         with open('output.txt') as f:
             output = f.read().splitlines()
         for i, o in zip(input, output):
-            self.assertEqual(str(function(i)), o)
+            self.assertEqual(str({{ title }}(i)), o)
 
 
 if __name__ == '__main__':
